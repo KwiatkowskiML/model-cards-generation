@@ -9,14 +9,12 @@ PolishLawLLM-Benchmark/
 ├── src/
 │   ├── benchmark_framework/    # LLM benchmarking framework
 │   ├── parsers/                # PDF parsing for exam data extraction
-│   ├── uploaders/              # Upload results to Firebase
 │   └── common/                 # Shared utilities and domain models
-├── data/
-│   ├── pdfs/                   # Source PDF files (exams, legal codes)
-│   ├── corpuses/               # Extracted legal code articles (JSON)
-│   ├── tasks/                  # Benchmark tasks (JSONL)
-│   └── results/                # Benchmark results
-└── frontend/                   # Results visualization dashboard
+└── data/
+    ├── pdfs/                   # Source PDF files (exams, legal codes)
+    ├── corpuses/               # Extracted legal code articles (JSON)
+    ├── tasks/                  # Benchmark tasks (JSONL)
+    └── results/                # Benchmark results
 ```
 
 ## Quick Start
@@ -69,55 +67,17 @@ python -m src.benchmark_framework.stats.cli stats <file-path>
 📖 **[Detailed documentation →](src/benchmark_framework/README.md)**
 
 ---
+### Model Cards
 
-### Parsers
-
-Extract exam questions and legal code articles from PDF files.
-
-```bash
-# Generate legal code corpuses
-python -m src.parsers.corpuses.setup_corpuses <pdf-dir> <output-dir> <year>
-
-# Parse exam PDFs
-python -m src.parsers.cli <pdfs-dir> <corpuses-dir> <output-dir>
-```
-
-📖 **[Detailed documentation →](src/parsers/README.md)**
-
----
-
-### Uploaders
-
-Upload benchmark results to Firebase for visualization in the frontend dashboard.
+Generate model cards based on the results of the tests.
 
 ```bash
-python -m src.uploaders.cli <results-dir>
+# Run the model card generator
+python -m src.model_cards.generate_model_cards <model-generating-the-card> <path-to-results>
+
+# Generate Bielik's model card
+python -m src.model_cards.generate_model_cards gemini-3-flash-preview data/results/speakleash-bielik-11b-v2.6-instruct/exams/
 ```
-
-📖 **[Detailed documentation →](src/uploaders/Readme.md)**
-
----
-
-### Frontend
-
-Next.js web dashboard for visualizing benchmark results stored in Firebase.
-
-```bash
-cd frontend
-bun install
-bun run dev
-```
-
-📖 **[Detailed documentation →](frontend/README.md)**
-
----
-
-## Task Types
-
-| Task | Description |
-|------|-------------|
-| `exams` | Polish legal bar exam questions (adwokacki, radcowy, komorniczy, notarialny) |
-| `judgments` | Court judgment analysis tasks |
 
 ---
 
