@@ -9,9 +9,10 @@ PolishLawLLM-Benchmark/
 ├── src/
 │   ├── benchmark_framework/    # LLM benchmarking framework
 │   ├── parsers/                # PDF parsing for exam data extraction
+│   ├── model_cards             # Functionality for generating model cards
 │   └── common/                 # Shared utilities and domain models
 └── data/
-    ├── pdfs/                   # Source PDF files (exams, legal codes)
+    ├── model_cards/            # Generated model cards (Markdown)
     ├── corpuses/               # Extracted legal code articles (JSON)
     ├── tasks/                  # Benchmark tasks (JSONL)
     └── results/                # Benchmark results
