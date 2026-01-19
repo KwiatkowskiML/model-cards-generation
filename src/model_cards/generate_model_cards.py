@@ -93,11 +93,11 @@ def prepare_analysis_prompt(
        *Zdolność wskazania poprawnego artykułu (np. "art. 148 k.k."). Wysoka wartość oznacza dobrą znajomość struktury kodeksów.*
     3. **Dokładność Treści Przepisu (DTP - Exact Match)**: {stats['text_metrics']['exact_match']:.2%}
        *Odsetek przypadków, gdzie model zacytował przepis idealnie (znak w znak).*
-    4. **ROUGE-N F1 (Średnia)**: {stats['text_metrics']['rouge_n_f1']:.2%}
+    4. **ROUGE-N F1 (Średnia)**: {stats['text_metrics']['rouge_n_f1']}
        *Ogólna jakość odtworzenia treści przepisu (n-gramy 1-3).*
-    5. **ROUGE-N TF-IDF Recall**: {stats['text_metrics']['rouge_n_tfidf']:.2%}
+    5. **ROUGE-N TF-IDF Recall**: {stats['text_metrics']['rouge_n_tfidf']}
        *Czułość ważona TF-IDF. Mierzy, czy model uwzględnił słowa kluczowe (rzadkie/ważne) dla danego przepisu.*
-    6. **ROUGE-W F1**: {stats['text_metrics']['rouge_w']:.2%}
+    6. **ROUGE-W F1**: {stats['text_metrics']['rouge_w']}
        *Miara uwzględniająca ciągłość sekwencji (Weighted LCS). Ważna przy cytowaniu długich fragmentów.*
     7. **Odsetek przypadków niemożliwych do sparsowania**: {stats['malformed_response_rate']:.2%}
 
@@ -154,15 +154,16 @@ def generate_model_card(
     1.  **DO (Dokładność Odpowiedzi)**: Czy model wybrał poprawną odpowiedź (A/B/C)?
     2.  **DOP (Dokładność Oznaczenia Przepisu)**: Czy model wskazał poprawną podstawę prawną (np. właściwy artykuł i paragraf Kodeksu Karnego)? Jest to kluczowe dla oceny, czy model nie "zgaduje".
     3.  **Jakość cytowania treści (Metryki Tekstowe)**:
-        * **ROUGE-W**: Nagradza ciągłe sekwencje słów (ważne przy dosłownym cytowaniu prawa).
+        * **ROUGE-W F1**: Nagradza ciągłe sekwencje słów (ważne przy dosłownym cytowaniu prawa).
         * **ROUGE-N TF-IDF**: Ważona metryka, która karze model mocniej za pominięcie słów kluczowych (rzadkich w korpusie), takich jak konkretne liczby, daty czy nazwy własne, a mniej za pominięcie słów pospolitych.
+        * **ROUGE-N F1**: średnia miar F1 dla n-gramów o róznych długościach, od 1 do 3.
 
     ### STRUKTURA RAPORTU (Output):
     Wygeneruj raport w Markdown zawierający dokładnie te sekcje:
 
     1.  **Nagłówek**: Nazwa modelu.
     2.  **Podsumowanie Wykonawcze**: Krótki, jednoakapitowy opis, czy model nadaje się do zastosowań prawniczych.
-    3.  **Wyniki Benchmarku (Tabela)**: Tabela zawierająca kolumny: Metryka, Wartość, Interpretacja. Uwzględnij DO, DOP, DTP oraz metryki ROUGE.
+    3.  **Wyniki Testóws (Tabela)**: Tabela zawierająca kolumny: Metryka, Wartość, Interpretacja. Uwzględnij DO, DOP, DTP oraz metryki ROUGE.
     4.  **Analiza Mocnych Stron**:
         * Czy model ma wysoką korelację między poprawną odpowiedzią a znajomością przepisu?
         * Czy dobrze radzi sobie z cytowaniem (wysokie ROUGE)?
