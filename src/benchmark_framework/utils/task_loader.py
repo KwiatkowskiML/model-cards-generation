@@ -1,12 +1,13 @@
 import json
 from pathlib import Path
 from typing import Optional
+
+from src.common.domain.exam import ExamQuestion
 from src.constants import ENCODING
 from src.common.domain.task import Task
-from src.benchmark_framework.getters.get_type import get_task_by_dataset
 
 
-def initialize_tasks_from_jsonl(tasks_path: Path, dataset_name: str) -> list[Task]:
+def initialize_tasks_from_jsonl(tasks_path: Path) -> list[Task]:
     """
     Load tasks from a JSONL file.
     """
@@ -18,7 +19,7 @@ def initialize_tasks_from_jsonl(tasks_path: Path, dataset_name: str) -> list[Tas
             if not line.strip():
                 continue
             task_raw = json.loads(line)
-            tasks.append(get_task_by_dataset(dataset_name, task_raw))
+            tasks.append(ExamQuestion.from_dict(task_raw))
     return tasks
 
 
@@ -38,6 +39,6 @@ def initialize_tasks(
         search_pattern = "**/*.jsonl"
 
     for file in base_search_path.glob(search_pattern):
-        tasks.extend(initialize_tasks_from_jsonl(file, dataset_name))
+        tasks.extend(initialize_tasks_from_jsonl(file))
 
     return tasks

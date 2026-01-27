@@ -1,9 +1,8 @@
 from src.parsers.extractors.regex_patterns import RegexPatterns
 from src.parsers.domain.legal_reference import LegalReference
-from src.parsers.extractors.base_extractor import BaseExtractor
 
 
-class LegalReferenceExtractor(BaseExtractor):
+class LegalReferenceExtractor:
     """Extract components from legal basis strings."""
 
     def extract(self, legal_basis: str) -> LegalReference:
