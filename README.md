@@ -1,22 +1,20 @@
-# Polish Law LLM Benchmark
+# Automated model cards generation for law exams
 
-A benchmark framework for evaluating Large Language Models on Polish legal tasks, including exam questions and court judgment analysis.
+Functionality for generating model cards based on the results of the tests.
 
 ## Project Structure
 
 ```
 PolishLawLLM-Benchmark/
 ├── src/
-│   ├── benchmark_framework/    # LLM benchmarking framework
-│   ├── parsers/                # PDF parsing for exam data extraction
-│   ├── uploaders/              # Upload results to Firebase
+│   ├── benchmark_framework/    # LLM models inference functionalities
+│   ├── model_cards             # Functionality for generating model cards
 │   └── common/                 # Shared utilities and domain models
-├── data/
-│   ├── pdfs/                   # Source PDF files (exams, legal codes)
-│   ├── corpuses/               # Extracted legal code articles (JSON)
-│   ├── tasks/                  # Benchmark tasks (JSONL)
-│   └── results/                # Benchmark results
-└── frontend/                   # Results visualization dashboard
+└── data/
+    ├── model_cards/            # Generated model cards (Markdown)
+    ├── corpuses/               # Extracted legal code articles (JSON)
+    ├── tasks/                  # Benchmark tasks (JSONL)
+    └── results/                # Benchmark results
 ```
 
 ## Quick Start
@@ -24,8 +22,6 @@ PolishLawLLM-Benchmark/
 ### Installation
 
 ```bash
-git clone <repository-url>
-cd PolishLawLLM-Benchmark
 pip install -r requirements.txt
 ```
 
@@ -38,7 +34,6 @@ export ANTHROPIC_API_KEY="..."   # For Claude models
 export OPENROUTER_API_KEY="..."  # For OpenRouter-hosted models
 export HF_TOKEN="..."            # For models hosted using Hugging Face Inference Endpoints
 export HF_ENDPOINT_URL="..."     # Custom endpoint URL for Hugging Face Inference Endpoints
-export MISTRAL_API_KEY="..."     # For Mistral models
 ```
 
 ### Run the tests
@@ -53,7 +48,7 @@ python -m src.benchmark_framework.cli gpt-5.2 exams
 
 ### Benchmark Framework
 
-Run LLM evaluations, calculate metrics, and aggregate statistics.
+Run LLM evaluations and calculate metrics calculate metrics.
 
 ```bash
 # Run benchmark
@@ -61,63 +56,19 @@ python -m src.benchmark_framework.cli <model-name> <task-type>
 
 # Calculate metrics on results
 python -m src.benchmark_framework.calculate_metrics <input-dir> <output-dir>
-
-# Get aggregate statistics
-python -m src.benchmark_framework.stats.cli stats <file-path>
 ```
-
-**[Detailed documentation →](src/benchmark_framework/README.md)**
-
 ---
+### Model Cards
 
-### Parsers
-
-Extract exam questions and legal code articles from PDF files.
+Generate model cards based on the results of the tests.
 
 ```bash
-# Generate legal code corpuses
-python -m src.parsers.corpuses.setup_corpuses <pdf-dir> <output-dir> <year>
+# Run the model card generator
+python -m src.model_cards.generate_model_cards <model-generating-the-card> <path-to-results>
 
-# Parse exam PDFs
-python -m src.parsers.cli <pdfs-dir> <corpuses-dir> <output-dir>
+# Generate Bielik's model card
+python -m src.model_cards.generate_model_cards gemini-3-flash-preview data/results/speakleash-bielik-11b-v2.6-instruct/exams/
 ```
-
-**[Detailed documentation →](src/parsers/README.md)**
-
----
-
-### Uploaders
-
-Upload benchmark results to Firebase for visualization in the frontend dashboard.
-
-```bash
-python -m src.uploaders.cli <results-dir>
-```
-
-**[Detailed documentation →](src/uploaders/README.md)**
-
----
-
-### Frontend
-
-Next.js web dashboard for visualizing benchmark results stored in Firebase.
-
-```bash
-cd frontend
-bun install
-bun run dev
-```
-
-**[Detailed documentation →](frontend/README.md)**
-
----
-
-## Task Types
-
-| Task | Description |
-|------|-------------|
-| `exams` | Polish legal bar exam questions (adwokacki, radcowy, komorniczy, notarialny) |
-| `judgments` | Court judgment analysis tasks |
 
 ---
 
