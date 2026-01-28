@@ -45,15 +45,15 @@ Generate model cards based on the results of the tests.
 python -m src.model_cards.generate_model_cards <model-name> <results-path>
 
 # Generate Bielik's model card
-python -m src.model_cards.generate_model_cards gemini-3-flash-preview data/results/speakleash-bielik-11b-v2.6-instruct/exams/
+python -m src.model_cards.generate_model_cards gemini-3-flash-preview data/results_with_metrics/speakleash-bielik-11b-v2.6-instruct/exams/
 ```
 
 #### Arguments
 
-| Argument                                                                                                               | Description                                                                                                      |
-|------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------|
-| `model-name`                                                                                                           | Model identifier of the model which will generate the cards (e.g., `gemini-3-flash-preview`, `gpt-5.2`)          |
-| `results-path` | Path with results of the model based on which the model cards will be generated |
+| Argument                                                                                                               | Description                                                                                                                       |
+|------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------|
+| `model-name`                                                                                                           | Model identifier of the model which will generate the cards (e.g., `gemini-3-flash-preview`, `gpt-5.2`)                           |
+| `results-path` | Path to the directory with results of the model based on which the model cards will be generated. The metrics must be calculated. |
 ---
 
 
