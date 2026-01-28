@@ -64,8 +64,6 @@ def prepare_analysis_prompt(
         ]
     )
 
-    print(exam_summary_str)
-
     # Model zna przepis (DOP=1, ROUGE wysokie), ale zaznacza złą odpowiedź (DO=0).
     inconsistent_logic = [
         e
