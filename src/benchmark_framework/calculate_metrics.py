@@ -55,7 +55,6 @@ def process_entry(entry: Dict[str, Any], metrics: List[BaseMetric]) -> Dict[str,
 
     entry["accuracy_metrics"] = accuracy_metrics
     entry["text_metrics"] = text_metrics
-    entry.pop("model_response", None)
     return entry
 
 

@@ -8,9 +8,9 @@ from src.model_cards.prompts import prepare_analysis_prompt, SYSTEM_PROMPT
 
 
 def generate_model_card(
-        generator_model_name: str,
-        results_path: Path,
-        output_dir: Path,
+    generator_model_name: str,
+    results_path: Path,
+    output_dir: Path,
 ):
     """
     Orchestrates the generation of a model card.

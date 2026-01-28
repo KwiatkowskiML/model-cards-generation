@@ -2,6 +2,7 @@ from pathlib import Path
 from typing import Any, Dict, List
 from src.common.file_operations import FileOperations
 
+
 def load_all_results(results_path: Path) -> List[Dict[str, Any]]:
     """Loads all JSONL files from a directory."""
     jsonl_files = list(results_path.rglob("*.jsonl"))
@@ -16,6 +17,7 @@ def load_all_results(results_path: Path) -> List[Dict[str, Any]]:
         all_results.extend(data)
 
     return all_results
+
 
 def extract_evaluated_model_name(results: List[Dict[str, Any]]) -> str:
     """Extracts and validates the model name from the results."""

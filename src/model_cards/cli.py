@@ -5,6 +5,7 @@ from src.model_cards.generator import generate_model_card
 
 app = typer.Typer()
 
+
 @app.command()
 def main(
     model_name: Annotated[
@@ -45,6 +46,7 @@ def main(
     except Exception as e:
         typer.echo(f"Error generating model card: {e}", err=True)
         raise typer.Exit(code=1)
+
 
 if __name__ == "__main__":
     app()
